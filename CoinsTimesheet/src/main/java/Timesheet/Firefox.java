@@ -1,5 +1,6 @@
 package Timesheet;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,11 +14,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import Timesheet.Utils;
 
-public class Firefox {
+public class Firefox extends Utils  {
 
 	@Test
-	public static void StartFirefox() throws InterruptedException {
+	public static void StartFirefox() throws InterruptedException, IOException {
 		WebDriverManager.firefoxdriver().setup();
 		// It create firefox profile
 		FirefoxProfile profile = new FirefoxProfile();
@@ -27,11 +29,12 @@ public class Firefox {
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		Thread.sleep(500);
-		driver.get("https://hourglass.thinksoftglobal.com:8001/accounts/login/?next=/timesheet/create/");
+		System.out.println(Utils.getGlobalValue("URL"));
+		driver.get(Utils.getGlobalValue("URL"));
 		Thread.sleep(500);
 		// Firefox Successfully lauched your coins PAGE
-		driver.findElement(By.id("id_username")).sendKeys("TG3025");
-		driver.findElement(By.id("id_password")).sendKeys("Start123");
+		driver.findElement(By.id("id_username")).sendKeys(Utils.getGlobalValue("userName"));
+		driver.findElement(By.id("id_password")).sendKeys(Utils.getGlobalValue("password"));
 		WebElement link = driver.findElement(By.xpath("//a[starts-with(@href, '#')]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", link);
