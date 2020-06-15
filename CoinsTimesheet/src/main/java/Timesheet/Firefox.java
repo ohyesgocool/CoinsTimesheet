@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import Timesheet.Utils;
 
-public class Firefox extends Utils  {
+public class Firefox extends Utils {
 
 	@Test
 	public static void StartFirefox() throws InterruptedException, IOException {
@@ -70,6 +70,7 @@ public class Firefox extends Utils  {
 		// Complete
 		Select complete = new Select(driver.findElement(By.xpath("//select")));
 		complete.selectByValue("100");
-		// driver.findElement(By.xpath("//input[@value='Send for approval']")).click();
+		if (Utils.getGlobalValue("sendApproval") == "1")
+			driver.findElement(By.xpath("//input[@value='Send for approval']")).click();
 	}
 }
