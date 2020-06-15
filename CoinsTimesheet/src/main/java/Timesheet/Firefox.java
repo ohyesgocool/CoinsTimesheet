@@ -3,7 +3,6 @@ package Timesheet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +11,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -30,7 +26,6 @@ public class Firefox {
 		// This will open firefox browser using above created profile
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		Thread.sleep(500);
 		driver.get("https://hourglass.thinksoftglobal.com:8001/accounts/login/?next=/timesheet/create/");
 		Thread.sleep(500);
@@ -41,10 +36,8 @@ public class Firefox {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", link);
 
-		Thread.sleep(10700);
-	
-		  Alert a = driver.switchTo().alert(); a.accept();
-	
+		Thread.sleep(500);
+
 		// DATE to Pick todays date from the Xpath
 		Date d = new Date();
 		String today = new SimpleDateFormat("dd-MMM-YYYY").format(d);
@@ -52,14 +45,14 @@ public class Firefox {
 		Thread.sleep(700);
 		driver.findElement(By.xpath("//dt[@id=\"span_id" + today + "\"]")).click();
 		// Below Codes are for clicking the add Button and selecting the task
-		WebElement AddButton;
-		AddButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@title='Add']")));
-		AddButton.click();
+		Thread.sleep(1700);
+		driver.findElement(By.xpath("//img[@title='Add']")).click();
+
 		Thread.sleep(500);
 		driver.findElement(By.id("dproject_task")).click();
-	
+
 		driver.findElement(By.id("project_checkbox")).click();
-	
+
 		// driver.findElement(By.xpath("//input[@value='general1']")).click();
 		WebElement element = driver.findElement(By.xpath("//input[@value='Ok']"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
