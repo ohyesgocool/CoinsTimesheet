@@ -13,25 +13,20 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import Timesheet.Utils;
 
-public class Firefox extends Utils {
+public class Firefox extends BaseTest {
+	
 
 	@Test
 	public static void StartFirefox() throws InterruptedException, IOException {
-		WebDriverManager.firefoxdriver().setup();
-		// It create firefox profile
-		FirefoxProfile profile = new FirefoxProfile();
-		// This will set the true value
-		profile.setAcceptUntrustedCertificates(true);
-		// This will open firefox browser using above created profile
-		WebDriver driver = new FirefoxDriver();
-		driver.manage().window().maximize();
-		Thread.sleep(500);
-		System.out.println(Utils.getGlobalValue("URL"));
-		driver.get(Utils.getGlobalValue("URL"));
-		Thread.sleep(500);
+		
+		
+		//lauchBrowser();
+		Utils utils= new Utils();
+		System.out.println(utils.getGlobalValue("userName"));
+		
 		// Firefox Successfully lauched your coins PAGE
-		driver.findElement(By.id("id_username")).sendKeys(Utils.getGlobalValue("userName"));
-		driver.findElement(By.id("id_password")).sendKeys(Utils.getGlobalValue("password"));
+		driver.findElement(By.id("id_username")).sendKeys(utils.getGlobalValue("userName"));
+		driver.findElement(By.id("id_password")).sendKeys(utils.getGlobalValue("password"));
 		WebElement link = driver.findElement(By.xpath("//a[starts-with(@href, '#')]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", link);
