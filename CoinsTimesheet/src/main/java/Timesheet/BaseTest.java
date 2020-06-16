@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class BaseTest extends Utils {
+public class BaseTest {
 	static WebDriver driver;
 	
 	public static WebDriver lauchBrowser() throws InterruptedException, IOException
@@ -23,8 +23,8 @@ public class BaseTest extends Utils {
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		Thread.sleep(500);
-		System.out.println(u.getGlobalValue("URL"));
-		driver.get(u.getGlobalValue("URL"));
+		System.out.println(Utils.getGlobalValue("URL"));
+		driver.get(Utils.getGlobalValue("URL"));
 		Thread.sleep(500);
 		return driver;
 

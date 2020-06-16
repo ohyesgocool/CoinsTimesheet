@@ -20,13 +20,13 @@ public class Firefox extends BaseTest {
 	public static void StartFirefox() throws InterruptedException, IOException {
 		
 		
-		//lauchBrowser();
-		Utils utils= new Utils();
-		System.out.println(utils.getGlobalValue("userName"));
+		lauchBrowser();
+		
+		System.out.println(Utils.getGlobalValue("userName"));
 		
 		// Firefox Successfully lauched your coins PAGE
-		driver.findElement(By.id("id_username")).sendKeys(utils.getGlobalValue("userName"));
-		driver.findElement(By.id("id_password")).sendKeys(utils.getGlobalValue("password"));
+		driver.findElement(By.id("id_username")).sendKeys(Utils.getGlobalValue("userName"));
+		driver.findElement(By.id("id_password")).sendKeys(Utils.getGlobalValue("password"));
 		WebElement link = driver.findElement(By.xpath("//a[starts-with(@href, '#')]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", link);
